@@ -1,0 +1,47 @@
+# =========================
+# CORE DATA STACK
+# =========================
+pandas
+numpy
+sqlalchemy
+psycopg2-binary
+
+# =========================
+# MACHINE LEARNING
+# =========================
+scikit-learn
+joblib
+xgboost
+lightgbm
+shap
+
+# =========================
+# VISUALIZATION
+# =========================
+matplotlib
+seaborn
+plotly
+
+# =========================
+# DASHBOARD
+# =========================
+streamlit
+
+# =========================
+# PIPELINE / UTILS
+# =========================
+prefect
+python-dotenv
+loguru
+tqdm
+typer
+
+# =========================
+# DEV TOOLS
+# =========================
+ruff
+pytest
+mkdocs
+
+# Install project
+-e .
