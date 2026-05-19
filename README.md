@@ -14,7 +14,23 @@ This project combines:
 The system predicts future weekly sales for each product category and customer state combination using lag-based forecasting and probabilistic demand analysis.
 
 ---
+---
 
+## 🎥 Demo & Project Walkthrough
+
+Watch the system in action:
+
+### 🚀 Full Project Explanation
+
+👉 [https://www.youtube.com/your-demo-link](https://youtu.be/EZQIIcms6GI)
+
+---
+
+### 📊 Power BI Dashboard Walkthrough
+
+👉 [https://www.youtube.com/your-powerbi-link](https://youtu.be/YbEaK842h-k)
+
+---
 # 🚀 Project Overview
 
 This platform helps businesses:
