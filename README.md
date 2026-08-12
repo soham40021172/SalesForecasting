@@ -17,6 +17,8 @@ The system predicts future weekly sales for each product category and customer s
 ---
 
 ## 🎥 Demo & Project Walkthrough
+### 🚀 Live Demo
+👉 https://salesforecasting-ytxxhyydyskckbmyhg5lqk.streamlit.app/
 
 Watch the system in action:
 
