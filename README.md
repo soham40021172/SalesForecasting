@@ -1,438 +1,100 @@
-# 🛒 Olist E-Commerce Sales Forecasting & Business Intelligence Platform
+# Olist E-Commerce Sales Forecasting
 
-An end-to-end Machine Learning and Analytics platform built on the Brazilian Olist E-Commerce dataset.
+A forecasting project built on the Brazilian Olist e-commerce dataset. It predicts weekly sales for each product category and customer state, and includes a Streamlit app and a Power BI dashboard for business users.
 
-This project combines:
+**Live demo:** https://salesforecasting-ytxxhyydyskckbmyhg5lqk.streamlit.app/
 
-- Advanced Time Series Forecasting
-- Automated ML Pipelines
-- PostgreSQL Data Warehousing
-- Streamlit Web Application
-- Power BI Executive Dashboards
-- Business Intelligence & Operational Insights
+## Results
 
-The system predicts future weekly sales for each product category and customer state combination using lag-based forecasting and probabilistic demand analysis.
+- Consolidated a 9-table PostgreSQL database into a clean 16,720-row weekly dataset, reducing zero-inflation by about 90%
+- XGBoost regressor with MAE 3.27 and RMSE 6.82
+- Poisson-based probabilities for demand surges and drops in each forecast week
 
----
----
+## Demo
 
-## 🎥 Demo & Project Walkthrough
-### 🚀 Live Demo
-👉 https://salesforecasting-ytxxhyydyskckbmyhg5lqk.streamlit.app/
+- [Full project explanation](https://youtu.be/EZQIIcms6GI)
+- [Power BI dashboard walkthrough](https://youtu.be/YbEaK842h-k)
 
-Watch the system in action:
-
-### 🚀 Full Project Explanation
-
-👉 [https://www.youtube.com/your-demo-link](https://youtu.be/EZQIIcms6GI)
-
----
-
-### 📊 Power BI Dashboard Walkthrough
-
-👉 [https://www.youtube.com/your-powerbi-link](https://youtu.be/YbEaK842h-k)
-
----
-# 🚀 Project Overview
-
-This platform helps businesses:
-
-- Forecast future product demand
-- Identify high-growth categories
-- Monitor operational KPIs
-- Analyze delivery performance
-- Detect seasonal sales surges
-- Support inventory & logistics planning
-
-The project simulates a production-ready ML forecasting workflow used in modern e-commerce companies.
-
----
-
-# 🏗️ System Architecture
+## How it works
 
 ```text
-Raw Olist Dataset
-       ↓
-Data Ingestion Pipeline
-       ↓
-Data Cleaning Pipeline
-       ↓
-Feature Engineering Pipeline
-       ↓
-PostgreSQL Data Warehouse
-       ↓
-Machine Learning Training
-       ↓
-Forecasting Engine
-       ↓
-Streamlit Application
-       ↓
-Power BI Executive Dashboard
+Raw Olist data -> ingestion -> cleaning -> feature engineering -> PostgreSQL -> XGBoost -> forecasts -> Streamlit app / Power BI
 ```
 
----
+- **Problem:** a supervised regression task. The target is weekly `sales` for each category and state.
+- **Features:** lags (1, 2, 4 and 8 weeks), 4-week rolling mean and standard deviation, month, week of year, and Black Friday and Christmas week flags.
+- **Why lag features:** sales in a given week depend heavily on recent weeks, so lags capture trend, momentum and seasonality.
+- **Why XGBoost:** it handles nonlinear patterns and feature interactions well on tabular data.
+- **Forecasting:** future weeks are predicted recursively, with each prediction feeding the next.
 
-# 📊 Features
+## Dashboards
 
-## ✅ Machine Learning Forecasting
+- **Streamlit app:** forecast by category and state, KPI cards, trend charts and surge probabilities.
+- **Power BI:** revenue analysis, operational KPIs, delivery performance, category insights, monthly sales trends and review analytics.
 
-- Weekly sales forecasting
-- Category + State level predictions
-- XGBoost forecasting model
-- Lag-based temporal learning
-- Rolling statistics features
-- Seasonal event detection
-- Future recursive forecasting
+## Key insights
 
----
+- Health and beauty is the top revenue-driving category
+- Delivery delays are linked to lower review scores
+- Black Friday weeks show major demand spikes
+- Seasonality strongly affects product categories
 
-## ✅ Probabilistic Forecasting
+## Tech stack
 
-Poisson distribution based:
+Python, Pandas, NumPy, Scikit-learn, XGBoost, SciPy, PostgreSQL, SQLAlchemy, Streamlit, Power BI, Plotly, Matplotlib
 
-- Demand surge probability
-- Demand drop probability
-- Sales risk estimation
+## Getting started
 
----
-
-## ✅ Automated ML Pipelines
-
-CLI pipeline execution:
+**1. Set up the environment**
 
 ```bash
-python -m olist_ecommerce.runpipeline --mode all
-```
-
-Supports:
-
-- Data ingestion
-- Cleaning
-- Feature engineering
-- Model training
-- Forecasting
-
----
-
-## ✅ Executive Power BI Dashboard
-
-Interactive dashboards including:
-
-- Revenue Analysis
-- Operational KPIs
-- Delivery Performance
-- Product Category Insights
-- Monthly Sales Trends
-- Review Analytics
-
----
-
-## ✅ Streamlit Application
-
-Interactive web application:
-
-- Forecast by category/state
-- Visual demand predictions
-- KPI cards
-- Trend charts
-- Probabilistic forecasting insights
-- Dashboard embedding support
-
----
-
-# 🧠 Machine Learning Approach
-
-## Forecasting Problem
-
-This is a supervised regression problem where:
-
-### Target Variable
-
-```python
-sales
-```
-
-### Key Features
-
-```python
-lag_1
-lag_2
-lag_4
-lag_8
-rolling_mean_4
-rolling_std_4
-month
-week_of_year
-is_black_friday_week
-is_christmas_week
-```
-
----
-
-## Why Lag Features?
-
-Lag features help the model learn:
-
-- Historical demand patterns
-- Seasonality
-- Momentum shifts
-- Sales trends
-- Weekly dependencies
-
-Example:
-
-```text
-Sales this week depends heavily on previous weeks' sales.
-```
-
----
-
-## Why XGBoost?
-
-XGBoost was selected because it:
-
-- Handles nonlinear patterns
-- Works well on tabular data
-- Captures feature interactions
-- Handles sparse data efficiently
-- Performs strongly on forecasting tasks
-
----
-
-# 🛠️ Tech Stack
-
-## Backend & ML
-
-- Python
-- Pandas
-- NumPy
-- Scikit-Learn
-- XGBoost
-- SciPy
-
----
-
-## Database
-
-- PostgreSQL
-- SQLAlchemy
-
----
-
-## Visualization
-
-- Power BI
-- Matplotlib
-- Plotly
-
----
-
-## Deployment
-
-- Streamlit
-- GitHub
-
----
-
-# 📂 Project Structure
-
-```text
-olist_ecommerce/
-│
-├── data/
-│
-├── models/
-│
-├── notebooks/
-│
-├── logs/
-│
-├── reports/
-│
-├── tests/
-│
-├── olist_ecommerce/
-│   │
-│   ├── pipeline/
-│   │   ├── cleaning/
-│   │   ├── data_ingesation/
-│   │   └── feature_engineering/
-│   │
-│   ├── modeling/
-│   │   ├── train.py
-│   │   └── predict.py
-│   │
-│   ├── db/
-│   │
-│   ├── config.py
-│   └── runpipeline.py
-│
-└── README.md
-```
-
----
-
-# ⚙️ Installation
-
-## 1️⃣ Clone Repository
-
-```bash
-git clone <your-repo-link>
+git clone <repository-url>
 cd olist-ecommerce-forecasting
-```
-
----
-
-## 2️⃣ Create Virtual Environment
-
-```bash
 python -m venv venv
-```
-
-Activate:
-
-### Windows
-
-```bash
-venv\Scripts\activate
-```
-
-### Linux/Mac
-
-```bash
-source venv/bin/activate
-```
-
----
-
-## 3️⃣ Install Dependencies
-
-```bash
+source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
----
-
-# 🗄️ PostgreSQL Setup
-
-Create database:
+**2. Create the database**
 
 ```sql
 CREATE DATABASE Olist_Ecommerce;
 ```
 
-Update database credentials inside:
+Then update the database credentials in `config.py`.
 
-```python
-config.py
-```
-
----
-
-# ▶️ Running Pipelines
-
-## Run Full Pipeline
+**3. Run the pipeline**
 
 ```bash
-python -m olist_ecommerce.runpipeline --mode all
-```
-
----
-
-## Train Model Only
-
-```bash
-python -m olist_ecommerce.runpipeline --mode train
-```
-
----
-
-## Generate Forecast
-
-```bash
+python -m olist_ecommerce.runpipeline --mode all       # ingestion, cleaning, features, training, forecast
+python -m olist_ecommerce.runpipeline --mode train     # train only
 python -m olist_ecommerce.runpipeline --mode predict --category bed_bath_table --state SP
 ```
 
----
-
-# 📈 Forecast Example
-
-| Week | Forecast Sales | Surge Probability |
-|------|-----------------|------------------|
-| 1 | 112 | 71% |
-| 2 | 118 | 76% |
-| 3 | 125 | 81% |
-
----
-
-# 📊 Power BI Dashboard
-
-The project includes:
-
-- Executive KPI dashboard
-- Revenue trend analysis
-- Product category performance
-- Logistics & delivery analysis
-- Customer satisfaction insights
-
----
-
-# 🌐 Streamlit App
-
-Run locally:
+**4. Launch the app**
 
 ```bash
 streamlit run app.py
 ```
 
----
+## Project structure
 
-# 📌 Key Business Insights
+```text
+olist_ecommerce/
+  pipeline/     ingestion, cleaning and feature engineering
+  modeling/     training and prediction
+  db/           database connection
+  config.py
+  runpipeline.py
+data/  models/  notebooks/  reports/  tests/
+```
 
-- Health & Beauty is the top revenue-driving category
-- Delivery delays negatively affect review scores
-- Black Friday weeks show major demand spikes
-- Seasonal trends strongly impact product categories
+## Future improvements
 
----
+- Prophet and LSTM forecasting models
+- Docker deployment
+- Inventory optimization using the forecasts
 
-# 🔮 Future Improvements
+## Author
 
-- LSTM / Deep Learning Forecasting
-- Prophet Time Series Models
-- Real-time Streaming Forecasts
-- Docker Deployment
-- CI/CD Automation
-- AWS/GCP Deployment
-- Inventory Optimization Engine
-
----
-
-# 📚 Learning Outcomes
-
-This project demonstrates:
-
-- End-to-End ML Engineering
-- Time Series Forecasting
-- Production ML Pipelines
-- Data Warehousing
-- Business Intelligence
-- Dashboard Engineering
-- Model Deployment
-
----
-
-# 👨‍💻 Author
-
-## Soham
-
-Machine Learning | Data Science | Analytics Engineering
-
----
-
-# ⭐ If You Like This Project
-
-Give this repository a ⭐ on GitHub.
-=======
-# SalesForecasting
-
+Soham Gaichor
